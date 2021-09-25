@@ -54,7 +54,7 @@ app.get("/", (request, response) => {
 
     var code_challenge = base64url.fromBase64(crypto.createHash('sha256').update(code_verifier).digest('base64'))
 
-    response.r  ender("index.html", {
+    response.render("index.html", {
         as_uri: `${asUri}/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope.join("%20")}&state=${state}`
             + `&code_challenge=${code_challenge}&code_challenge_method=S256&response_type=code`
     })
@@ -94,6 +94,7 @@ app.get("/resource", async (request, response) => {
             'Authorization': "Bearer " + request.session.token,
         }
     })
+
 
     console.log(res.status)
     if (res.status != 200) {
